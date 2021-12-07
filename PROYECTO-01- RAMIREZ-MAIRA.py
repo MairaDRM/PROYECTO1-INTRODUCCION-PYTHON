@@ -1,12 +1,19 @@
-# -*- coding: utf-8 -*-
 """
-Spyder Editor
+SANTANDER TECNOLOGÍA: 
+CIENCIA DE DATOS | EMTECH-FUNED
 
-This is a temporary script file.
+Maira Dolores Ramírez Mendiola
+
+Tutor: Jaime Saúl Alonso Sánchez
+Grupo: ANALISTAS: ADIÓS EXCEL 
+
+
 """
+
 from lifestore_file import lifestore_products, lifestore_sales, lifestore_searches
 
-limpiarPantalla = '\n' * 20
+limpiarPantalla = '\n' * 20 #ya que no se cuenta con un comando para limpiar
+#la consola se obta por usar esta estrategía
 
 
 print('⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯LifeStore⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯\n ')
@@ -14,16 +21,24 @@ print('⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯L
 
 
 #LOGIN USUARIO
+#primera parte para definir las entradas validas para el acceso
 
 
 if __name__ == "__main__": 
-    USUARIO = 'Jimmy'
-    CONTRASENA = 'ymmij'
+    USUARIO1 = 'Jimmy'
+    CONTRASENA1 = 'ymmij'
+    
+    USUARIO2='Mai'
+    CONTRASENA2 = 'ariam'
 
+#implementando seguridad con un cierre del código para quien 
+#no ingrese el acceso de manera correcta
 
     INTENTOS = 3
 
-    while True:
+
+    while True: #para que al equivocarse el usuario tenga una nueva 
+                #oprtunidad de acceder
 
         if INTENTOS == 0:
             exit()
@@ -31,14 +46,29 @@ if __name__ == "__main__":
         username = input('Ingrese su nombre de usuario:')
         password = input('Ingrese la contraseña: ')
 
-        if username == USUARIO:
+        if username == USUARIO1: #para que el programa corrobore cuales son los 
+                                 #accesos permitidos 
 
-            if password == CONTRASENA:
+            if password == CONTRASENA1:
+                print(f"\n\n\nBienvenido a LifeStore, {USUARIO1}.\n")
                 break
 
             else:
               INTENTOS = INTENTOS - 1
               print(f'\n!! Accesso invalido, {INTENTOS} intentos restantes !!\n')
+        
+        elif username == USUARIO2: 
+
+            if password == CONTRASENA2:
+                print(f"\n\n\nBienvenido a LifeStore, {USUARIO2}.\n")
+
+                break
+
+            else:
+              INTENTOS = INTENTOS - 1
+              print(f'\n!! Accesso invalido, {INTENTOS} intentos restantes !!\n')
+        
+        
         else:
             INTENTOS = INTENTOS - 1
 
@@ -46,18 +76,23 @@ if __name__ == "__main__":
 
     print('▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄\n')
     
-    print(f"\n\n\nBienvenido a LifeStore, {USUARIO}.\n")
+    
 
 
-
-
+#se definen las cedanas de texto a buscar para poder divir la lista por meses
 meses = ['/01/', '/02/', '/03/','/04/','/05/','/06/','/07/', '/08/', '/09/', 
          '/10/','/11/','/12/']
 
 mes_nombre=['ENERO', 'FEBRERO', 'MARZO','ABRIL','MAYO','JUNIO','JULIO', 
             'AGOSTO', 'SEPTIEMBRE', 'OCTUBRE', 'NOVIEMBRE', 'DICIEMBRE']
 
-cantidad_prod=len(lifestore_products)
+cantidad_prod=len(lifestore_products) #para saber cuantos productos maneja 
+                                      #LifeStore ya que esto nos especificara 
+                                      #el tamaño de las buslistas para cada 
+                                      #consigna.
+
+#para hacer interactivo el codigo es necesario preguntarle al usuario cuales 
+#son las opciones que quiere revisar 
 
 mes=int(input('Ingrese el número del mes que desee consultar: '))
 print('\n════════════════════════════════════════════════════════════════════\n')
@@ -77,11 +112,14 @@ op_elegida=int(input('Introduzca la opción que desee consultar:\n  1.-Ventas\n 
 
 if op_elegida ==1: #VENTAS
 
+#para la utilización del menú es necesario porner condicionales para ejecutar 
+#la elección ingresada. 
     contador=0
     prod_ventas = []
     por_mes=[]
     ven_s0 = []
     
+    #Este ciclo nos ayuda a generar una lista solo con el mes que deseamos consultar
     for venta in lifestore_sales: 
         fecha_venta = venta[3]
         vendidos=venta[1]
@@ -89,8 +127,8 @@ if op_elegida ==1: #VENTAS
             contador=contador+1
             por_mes.append(vendidos)
 
-    
-   
+#en este ciclo realizmaos una lista en la cual almacenaremos las ventas ya que
+#
     for id in range(cantidad_prod): 
         verdadero_id=id+1 
         renglon= [verdadero_id, 0]
